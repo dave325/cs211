@@ -1,0 +1,85 @@
+Homework lcm and gcd and sum 
+
+Solution to gcd 
+	int gcd(int a, int b){
+me
+		return b==0 ? a:gcd(b,a%b);
+	}
+Solution to gcd - Iterative function
+	int gcd(int a, int b){
+		int c;
+		while(b != 0) {
+			c = a;
+			a = b;
+			b = c%b;
+		}
+		return c;
+	}
+Solution to lcm
+	int lcm(int a, intb){
+		return (a*b)/gcd(a,b);
+	}
+Solution to add 
+	void sum(int r1, int r2, int r3){
+		r3[1] = lcm(r1[1], r2[1]);
+		r3 = ((r3[1]/r1[1])) * r1[0]) + ((r3[1]/r2[1]) + r3[0]);
+	}
+
+*********************NEW Homework add subtract, multiply, divide
+Bank Account 
+Rational Number -> Integer Numerator and integer denominator
+Represent account that has account number, name of person, and balance
+	-> Can represent them by types - int, string, doublle respectively 
+C++ has special function that allows you to create something with different types inside of them
+	-> Initialized through keyword struct
+-> EG 
+	-> struct BankAccount{
+		int account;
+		string name;
+		double balance;
+	}
+	-> Once you declare and declare structure type - you can treat it as a dataType
+	-> int main(){ BankAccount acc = {1, 'name', 10.00}; } 
+	-> Values should be in same order as they are declared in struct
+Lec 8/7
+
+	-> Structs 
+		#include <iostream>
+		using namespace std;
+		void output(BankAccount a);
+		struct BankAccount{
+			int accno;
+			string name;
+			double balance;
+		}
+		// Change output and put it here
+		void input(BankAccount a);		
+		// Can have return type as struct
+		BankAccount input();
+		int main(){
+			BankAccount acc;
+			BankAccount acc2 = {1, "Dave", 100.0};
+			acc = acc2;
+			output(acc);
+		}
+		void output(BankAccount a){
+			cout << "account#: " << a.accno << endl;
+			cout << "Name: " << a.namel << endl;
+			cout << "Balance: " << a.balance << endl;
+		}
+		void input(BankAccount &a){
+			cout <<"Account#: ";
+			cin >> a.accountno;
+			cout << "Name: ";
+			cin >> a.name;
+			cout << "Balance: ";
+			cin >> a.balance;
+		}
+		BankAccount input(){
+			BankAccount a;
+			// Same as other input function
+			// Return the a to program	
+			return a;		
+		} 	
+	-> Above program is an example of creating, initializing, setting and declaring a struct 
+	-> 

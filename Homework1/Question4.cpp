@@ -7,14 +7,16 @@ int main(){
   while(input > 0){
     std::cout << reverseNum(input);
     std::cout << "Please enter a posiitve integer (negative will terminate program)";
-    std:: cin >>input;
+    std::cin >>input;
   }
 }
 int reverseNum(int input){
-  int num;
-  if(input < 10){
-    return num;
-  }
-  num += input%10;
-  return reverseNum(input/10);
+  int rev = 0, rem;
+  while(input!=0)
+	{
+		rem=input%10;
+		rev=rev*10+rem;
+		input=input/10;
+	}
+  return rev;
 }
