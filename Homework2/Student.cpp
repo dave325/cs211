@@ -25,7 +25,7 @@ Student::Student(){
     gpa = 0;
     dateOfBirth = "";
     matriculationDate = "";
-    id++;
+    id = idCount++;
 }
 // Constructor if all values are given
 Student::Student(std::string lastName, std::string firstName,int credits, double gpa, std::string dateOfBirth,std::string  matriculationDate){
@@ -35,7 +35,7 @@ Student::Student(std::string lastName, std::string firstName,int credits, double
     this->gpa = gpa;
     this->dateOfBirth = dateOfBirth;
     this->matriculationDate = matriculationDate;
-    id++;
+    id = idCount++;
 }  
 
 // returns lastName variable
@@ -56,6 +56,10 @@ std::string Student::getFirstName(){
 // sets lastName variable
 void Student::setFirstName(std::string name){
     firstName = name;
+}
+
+int Student::getId(){
+    return id;
 }
 
 // Returns the standing
@@ -105,33 +109,36 @@ void Student::setMatriculationDate(std::string date){
 }
 
 // Prints out all student information
-const std::ostream& operator<<(std::ostream& os, const Student& s){
-    os << "Last Name: " << lastName <<std::endl;
-    os << "First Name: " << firstName <<std::endl;
-    os << "Credits: " << credits <<std::endl;
-    os << "Standing: " << standing <<std::endl;
-    os << "GPA: " << gpa <<std::endl;
-    os << "DOB: " << dateOfBirth <<std::endl;
-    os << "Matriculation Date: " << matriculationDate <<std::endl;
+const std::ostream& operator<<(std::ostream &os, Student& s){
+    os << "Last Name: " << s.getLastName() <<std::endl;
+    os << "First Name: " << s.getFirstName() <<std::endl;
+    os << "Credits: " << s.getCredits() <<std::endl;
+    os << "Standing: " << s.getStanding() <<std::endl;
+    os << "GPA: " << s.getGpa() <<std::endl;
+    os << "DOB: " << s.getDateOfBirth() <<std::endl;
+    os << "Matriculation Date: " << s.getMatriculationDate() <<std::endl;
+    os << "Id: " << s.getId() <<std::endl;
     return os;
 }
 
 // Sets all student information
-const std::istream& operator>>(std::istream& is, const Student& s){
+const std::istream& operator>>(std::istream &is, Student& s){
     std::string tempString; int tempInt; double tempDouble;
-    std::cout << "Last Name: (original " << getLastName() << ") " << std::endl;
-    std::cin >> tempString; setLastName(tempString);
-    std::cout << "First Name: (original " << getFirstName() << ") "<< std::endl;
-    std::cin >> tempString; setFirstName(tempString);
-    std::cout << "Credits: (original " << getCredits() << ") "<< std::endl;
-    std::cin >> tempInt; setCredits(tempInt);
-    std::cout << "GPA: (Original " << getGpa() << ")" << std::endl;
-    std::cin >> tempDouble; setGpa(tempDouble);
-    std::cout << "DOB: (original " << getDateOfBirth() << ") " << std::endl;
-    std::cin >> tempString; setDateOfBirth(tempString);
-    std::cout << "Matriculation Date: (original " << getMatriculationDate() << ") " << std::endl;
-    std::cin >> tempString; setMatriculationDate(tempString);
+    std::cout << "Last Name: (original " << s.getLastName() << ") " << std::endl;
+    is >> tempString; s.setLastName(tempString);
+    std::cout << "First Name: (original " << s.getFirstName() << ") "<< std::endl;
+    is >> tempString; s.setFirstName(tempString);
+    std::cout << "Credits: (original " << s.getCredits() << ") "<< std::endl;
+    is >> tempInt; s.setCredits(tempInt);
+    std::cout << "GPA: (Original " << s.getGpa() << ")" << std::endl;
+    is >> tempDouble; s.setGpa(tempDouble);
+    std::cout << "DOB: (original " << s.getDateOfBirth() << ") " << std::endl;
+    is >> tempString; s.setDateOfBirth(tempString);
+    std::cout << "Matriculation Date: (original " << s.getMatriculationDate() << ") " << std::endl;
+    is >> tempString; s.setMatriculationDate(tempString);
+    return is;
 }
+
 
 const bool Student::operator==(const Student& s){
     if(this->firstName == s.firstName && this->lastName == s.lastName && this->id == s.id){
@@ -148,17 +155,33 @@ const bool Student::operator!=(const Student& s){
 }
 
 const bool Student::operator<(const Student& s){
-    
+    if(this->id - s.id < 0){
+        return true;
+    }else{
+        return false;
+    }
 }
 
 const bool Student::operator>(const Student& s){
-
+    if(this->id - s.id > 0){
+        return true;
+    }else{
+        return false;
+    }
 }
 
 const bool Student::operator<=(const Student& s){
-
+    if(this->id - s.id <= 0){
+        return true;
+    }else{
+        return false;
+    }
 }
 
 const bool Student::operator>=(const Student& s){
-
+    if(this->id - s.id >= 0){
+        return true;
+    }else{
+        return false;
+    }
 }

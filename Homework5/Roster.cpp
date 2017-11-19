@@ -109,8 +109,11 @@ void Roster::sortStudents(){
 // Prints out all students
 const std::ostream& operator<<(std::ostream& os, Roster& r){
     for(int i = 0; i < MAX_CAPACITY; i++){
+        if(r.students[i].getLastName() == ""){
+            break;
+        }
         // Print out student if value is found
-        os << "Student " << i << ": " << r.students[i];
+        os << "Student " << i << ": " << std::endl << r.students[i];
     }
     return os;
 }

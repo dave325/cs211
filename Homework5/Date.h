@@ -39,9 +39,14 @@ class Date {
       // output the date in a nice format
       void output() const;
 
+      // Have to implement
+        friend const std::ostream& operator<<(std::ostream& os, Date& d);
+        friend const std::istream& operator>>(std::istream& is, Date& d);
+
+
    private:
       int month, day, year;
-          void adjust();
+      void adjust();
 };
 
 #endif

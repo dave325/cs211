@@ -1,6 +1,7 @@
 #include <string>
 #include <iostream>
 #include "Roster.h"
+#include "Studenr.h"
 /**
  *  Name: David Dataram
  *  Class: CS211 
@@ -45,7 +46,7 @@ void Roster::setInstructorName(std::string name){
 }
 
 // Adds Student to array
-void Roster::addStudent(std::string student){
+void Roster::addStudent(const Student& student){
     int size = 10;
     for(int i= 0; i< size; i++){
         // Student is set, then break loop 
@@ -59,7 +60,7 @@ void Roster::addStudent(std::string student){
 }
 
 // Deletes student
-void Roster::deleteStudent(std::string student){
+void Roster::deleteStudent(const Student& student){
     int size = MAX_CAPACITY;
     for(int i= 0; i< size; i++){
         // Finds student in loop and deletes them
@@ -69,8 +70,9 @@ void Roster::deleteStudent(std::string student){
     }
 }
 
+
 // Searches for student
-std::string Roster::searchStudent(std::string student){
+Student Roster::searchStudent(const Student student){
     int size = MAX_CAPACITY;
     for(int i= 0; i< size; i++){
         // If student is found, then return student
@@ -79,17 +81,19 @@ std::string Roster::searchStudent(std::string student){
         }
     }
     // If no student is found the return
-     return "Student not found";
+     return NULL;
 }
 
 // Prints out all students
-void Roster::printStudents(){
+const std::ostream& operator<<(std::ostream& os, const Roster& r){
     for(int i = 0; i < MAX_CAPACITY; i++){
         // If no value is found for student then continue the loop
-        if(students[i] == ""){
+        if(r.students[i] == ""){
             continue;
         }
         // Print out student if value is found
-        std::cout << "Student " << i << ": " <<students[i] << std::endl;
+        std::cout << "Student " << i << ": " <<r.students[i] << std::endl;
     }
 }
+
+

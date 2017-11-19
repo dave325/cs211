@@ -46,6 +46,7 @@ string Date::getMonth() const {
       return "October";
    if (month == 11)
       return "November";
+   return "";
 }
 // Returns the month stored by the class as a number
 int Date::getMonthNum() const { return month; }
@@ -58,24 +59,25 @@ int Date::getYear() const { return year;}
 
 
 // solicit the date from the user
-void Date::input()
+const std::istream& operator>>(std::istream& is, Date& d)
 {
         cout << "Input month: ";
-        cin >> month;
+        is >> d.month;
         cout << "Input day: ";
-        cin >> day;
+        is >> d.day;
         cout << "Input year: ";
-        cin >> year;
-        adjust();
-
+        is >> d.year;
+        d.adjust();
+        return is;
 }
 
-
-void Date::output() const
+const std::ostream& operator<<(std::ostream& os, Date& d)
 {
-        cout << "Date: " << getMonth() << " " << day << ", " << year << endl;
-
+        os << d.getMonth() << " " << d.day << ", " << d.year << endl;
+        return os;
 }
+
+
 
 
 // Fixes the date so that it is in legal range

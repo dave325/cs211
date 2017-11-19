@@ -3,6 +3,7 @@
 
 #include <string>
 #include <iostream>
+#include "Date.h"
 class Student{
     private:
         std::string lastName;
@@ -11,13 +12,13 @@ class Student{
         int id;
         int credits;
         double gpa;
-        std::string dateOfBirth;
-        std::string matriculationDate;
+        Date dateOfBirth;
+        Date matriculationDate;
         void setStanding(int credit);
     public:
         static int idCount;
         Student();
-        Student(std::string lastName, std::string firstName,int credits, double gpa, std::string dateOfBirth,std::string  matriculationDate);
+        Student(std::string lastName, std::string firstName,int credits, double gpa, Date dateOfBirth,Date matriculationDate);
         std::string getLastName();
         void setLastName(std::string name);
         std::string getFirstName();
@@ -28,10 +29,10 @@ class Student{
         void setCredits(int amount);
         double getGpa();
         void setGpa(double amount);
-        std::string getDateOfBirth();
-        void setDateOfBirth(std::string date);
-        std::string getMatriculationDate();
-        void setMatriculationDate(std::string date);
+        Date getDateOfBirth();
+        void setDateOfBirth(Date date);
+        Date getMatriculationDate();
+        void setMatriculationDate(Date date);
         const bool operator==(const Student& s);
         const bool operator!=(const Student& s);
         const bool operator<(const Student& s);

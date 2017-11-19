@@ -8,13 +8,14 @@ class Student{
         std::string lastName;
         std::string firstName;
         std::string standing;
-        int static id;
+        int id;
         int credits;
         double gpa;
         std::string dateOfBirth;
         std::string matriculationDate;
         void setStanding(int credit);
     public:
+        static int idCount;
         Student();
         Student(std::string lastName, std::string firstName,int credits, double gpa, std::string dateOfBirth,std::string  matriculationDate);
         std::string getLastName();
@@ -22,6 +23,7 @@ class Student{
         std::string getFirstName();
         void setFirstName(std::string name);
         std::string getStanding();
+        int getId();
         int getCredits();
         void setCredits(int amount);
         double getGpa();
@@ -36,8 +38,8 @@ class Student{
         const bool operator>(const Student& s);
         const bool operator<=(const Student& s);
         const bool operator>=(const Student& s);
-        friend const std::ostream& operator<<(std::ostream& os, const Student& s);
-        friend const std::istream& operator>>(std::istream& os, const Student& s);
+        friend const std::ostream& operator<<(std::ostream& os, Student& s);
+        friend const std::istream& operator>>(std::istream& os, Student& s);
 };
 
 #endif

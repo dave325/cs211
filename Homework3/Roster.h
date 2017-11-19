@@ -14,7 +14,9 @@ class Roster{
         std::string course_code;
         int num_credits;
         std::string instructor_name;
-        std::string students[MAX_CAPACITY];
+        Student students[MAX_CAPACITY];
+        // Implement
+        void sortStudents();
     public:
         std::string getCourseName() const;
         void setCourseName(std::string courseName);
@@ -24,9 +26,14 @@ class Roster{
         void setNumCredits(int num);
         std::string getInstructorName() const;
         void setInstructorName(std::string name);
-        void addStudent(std::string student);
-        void deleteStudent(std::string student);
-        std::string searchStudent(std::string student);
+        void addStudent(const Student& student);
+        void deleteStudent(const Student& student);
+        Student searchStudent(const Student student);
         void printStudents();
+
+        // Have to implement
+        friend const std::ostream& operator<<(std::ostream& os, const Roster& r);
+        friend const std::istream& operator>>(std::istream& is, const Roster& r);
+
 };
 #endif 
