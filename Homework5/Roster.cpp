@@ -118,4 +118,22 @@ const std::ostream& operator<<(std::ostream& os, Roster& r){
     return os;
 }
 
+const std::istream& operator>>(std::istream& is, Roster& r){
+    for (int i = 0; i < MAX_CAPACITY; i++){
+        if(r.students[i].getLastName() != ""){
+            continue;
+        }
+        std::string ans;
+        is >> r.students[i];
+        std::cout << "Do you want to add more students. Y for yes, N for no" << std::endl;
+        std::cin >> ans;
+        transform(ans.begin(), ans.end(), ans.begin(), ::tolower);
+        if(ans != "y" ){
+            break;
+        }
+    }
+    return is;
+}
+
+
 

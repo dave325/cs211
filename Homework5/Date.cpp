@@ -46,6 +46,8 @@ string Date::getMonth() const {
       return "October";
    if (month == 11)
       return "November";
+   if (month == 12)
+      return "December";
    return "";
 }
 // Returns the month stored by the class as a number

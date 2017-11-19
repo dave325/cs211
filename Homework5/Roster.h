@@ -32,8 +32,7 @@ class Roster{
         void printStudents();
 
         friend const std::ostream& operator<<(std::ostream& os, Roster& r);
-        // Have to implement
-        friend const std::istream& operator>>(std::istream& is, const Roster& r);
+        friend const std::istream& operator>>(std::istream& is, Roster& r);
 
 };
 #endif 
