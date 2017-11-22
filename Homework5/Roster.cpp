@@ -127,6 +127,7 @@ const std::istream& operator>>(std::istream& is, Roster& r){
         is >> r.students[i];
         std::cout << "Do you want to add more students. Y for yes, N for no" << std::endl;
         std::cin >> ans;
+        // Retrive the lowercase value
         transform(ans.begin(), ans.end(), ans.begin(), ::tolower);
         if(ans != "y" ){
             break;

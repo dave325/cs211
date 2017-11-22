@@ -1,4 +1,3 @@
-// David Dataram CS211 HW#2
 #include <string>
 #include <iostream>
 #include "Student.h"
