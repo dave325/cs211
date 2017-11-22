@@ -157,7 +157,7 @@ const bool Student::operator!=(const Student& s){
 }
 
 const bool Student::operator<(const Student& s){
-    if(this->id - s.id < 0){
+    if(this->firstName < s.firstName && this->lastName < this->firstName && this->id - s.id < 0){
         return true;
     }else{
         return false;
@@ -165,7 +165,7 @@ const bool Student::operator<(const Student& s){
 }
 
 const bool Student::operator>(const Student& s){
-    if(this->id - s.id > 0){
+    if(this->firstName > s.firstName && this->lastName > this->firstName && this->id - s.id > 0){
         return true;
     }else{
         return false;
@@ -173,7 +173,7 @@ const bool Student::operator>(const Student& s){
 }
 
 const bool Student::operator<=(const Student& s){
-    if(this->id - s.id <= 0){
+    if(this->firstName <= s.firstName && this->lastName <= this->firstName && this->id - s.id <= 0){
         return true;
     }else{
         return false;
@@ -181,7 +181,7 @@ const bool Student::operator<=(const Student& s){
 }
 
 const bool Student::operator>=(const Student& s){
-    if(this->id - s.id >= 0){
+    if(this->firstName >= s.firstName && this->lastName >= this->firstName && this->id - s.id >= 0){
         return true;
     }else{
         return false;
