@@ -7,6 +7,7 @@
  *  Class: CS211 
  *  HW #3
  */
+int Student::idCount = 0;
 // Retrieve Course Number
 std::string Roster::getCourseName() const{
     return course_name;
@@ -93,10 +94,9 @@ void Roster::sortStudents(){
    {
        key = students[i];
        j = i-1;
- 
        /* Move elements of arr[0..i-1], that are
           greater than key, to one position ahead
-          of their current position */
+          of their current position */ 
        while (j >= 0 && students[j] > key)
        {
            students[j+1] = students[j];
@@ -120,7 +120,8 @@ const std::ostream& operator<<(std::ostream& os, Roster& r){
 
 const std::istream& operator>>(std::istream& is, Roster& r){
     for (int i = 0; i < MAX_CAPACITY; i++){
-        if(r.students[i].getLastName() != ""){
+        // stops when id does not exist
+        if(r.students[i].getId() < 0){
             continue;
         }
         std::string ans;
@@ -135,6 +136,3 @@ const std::istream& operator>>(std::istream& is, Roster& r){
     }
     return is;
 }
-
-
-
