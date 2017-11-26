@@ -2,12 +2,50 @@
 #include <iostream>
 #include "Roster.h"
 #include "Student.h"
-/**
- *  Name: David Dataram
- *  Class: CS211 
- *  HW #3
- */
 int Student::idCount = 0;
+
+Roster::Roster(){
+    course_name = "";
+    course_code = "";
+    num_credits = 0;
+    instructor_name = "";
+    size = 1;
+    students = new Student[size];
+}
+
+ Roster::Roster(const Roster& other){
+    course_name = other.course_name;
+    course_code = other.course_code;
+    num_credits = other.num_credits;
+    instructor_name = other.instructor_name;
+    size = other.size;
+    students = new Student[size];
+    for(int i = 0; i < size; i++){
+        students[i] = other.students[i];
+    }
+ }
+
+void Roster::grow(){
+    Student* temp = new Student[size++];
+    for(int i =0; i < size; i++){
+        temp[i] = students[i];
+    }
+    delete [] students;
+    students = temp;
+}
+
+void Roster::shrink(){
+    Student* temp = new Student[size--];
+    for(int i =0; i < size; i++){
+        temp[i] = students[i];
+    }
+    delete[] students;
+    students = temp;
+}
+
+Roster::~Roster(){
+    delete[] students;
+}
 // Retrieve Course Number
 std::string Roster::getCourseName() const{
     return course_name;
@@ -48,25 +86,19 @@ void Roster::setInstructorName(std::string name){
 
 // Adds Student to array
 void Roster::addStudent(const Student& student){
-    for(int i= 0; i< MAX_CAPACITY; i++){
-        // Student is set, then break loop 
-        if(students[i].getFirstName() == ""){
-            students[i] = student;
-            sortStudents();
-            break;
-        }
-    }
+    grow();
+    students[size] = student;
 }
 
 // Deletes student
 void Roster::deleteStudent(const Student& student){
-    int size = MAX_CAPACITY;
     for(int i= 0; i< size; i++){
         // Finds student in loop and deletes them
         if(students[i] == student){
-            for(int j = i; j < MAX_CAPACITY; j++){
+            for(int j = i; j < size; j++){
                 students[i] = students[i+1];
             }
+            shrink();
             break;
         }
     }
@@ -75,22 +107,21 @@ void Roster::deleteStudent(const Student& student){
 
 // Searches for student
 Student Roster::searchStudent(const Student student){
-    int size = MAX_CAPACITY;
     for(int i= 0; i< size; i++){
         // If student is found, then return student
         if(students[i] == student){
             return students[i];
         }
     }
-    Student null;
     // If no student is found the return
-     return null;
+    std::cout << "Index does not exist" << std::endl;
+    exit(0);
 }
 
 void Roster::sortStudents(){
    int i, j;
    Student key;
-   for (i = 1; i < MAX_CAPACITY; i++)
+   for (i = 1; i < size; i++)
    {
        key = students[i];
        j = i-1;
@@ -106,9 +137,17 @@ void Roster::sortStudents(){
    }
 }
 
+Student Roster::operator[](int idx) const{
+    if(idx > size || idx < 0){
+        std::cout << "Index does not exist" << std::endl;
+        exit(0);
+    }
+    return students[idx];
+}
+
 // Prints out all students
 const std::ostream& operator<<(std::ostream& os, Roster& r){
-    for(int i = 0; i < MAX_CAPACITY; i++){
+    for(int i = 0; i < r.size; i++){
         if(r.students[i].getLastName() == ""){
             break;
         }
@@ -119,20 +158,16 @@ const std::ostream& operator<<(std::ostream& os, Roster& r){
 }
 
 const std::istream& operator>>(std::istream& is, Roster& r){
-    for (int i = 0; i < MAX_CAPACITY; i++){
-        // stops when id does not exist
-        if(r.students[i].getId() < 0){
-            continue;
-        }
-        std::string ans;
+    std::string ans;
+    int i = 0;
+    do{
         is >> r.students[i];
         std::cout << "Do you want to add more students. Y for yes, N for no" << std::endl;
         std::cin >> ans;
         // Retrive the lowercase value
         transform(ans.begin(), ans.end(), ans.begin(), ::tolower);
-        if(ans != "y" ){
-            break;
-        }
-    }
+        r.grow();
+        i++;
+    }while(ans == "y");
     return is;
 }
