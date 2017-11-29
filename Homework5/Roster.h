@@ -34,7 +34,7 @@ class Roster{
         void addStudent(const Student& student);
         void deleteStudent(const Student& student);
         Student searchStudent(const Student student);
-        Student operator[](int idx) const;
+        Student& operator[](int idx) const;
         friend const std::ostream& operator<<(std::ostream& os, Roster& r);
         friend const std::istream& operator>>(std::istream& is, Roster& r);
 

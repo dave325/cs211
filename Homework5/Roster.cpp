@@ -19,10 +19,8 @@ Roster::Roster(){
     num_credits = other.num_credits;
     instructor_name = other.instructor_name;
     size = other.size;
-    students = new Student[size];
-    for(int i = 0; i < size; i++){
-        students[i] = other.students[i];
-    }
+    delete students;
+    students = other.students;
  }
 
 void Roster::grow(){
@@ -137,7 +135,7 @@ void Roster::sortStudents(){
    }
 }
 
-Student Roster::operator[](int idx) const{
+Student& Roster::operator[](int idx) const{
     if(idx > size || idx < 0){
         std::cout << "Index does not exist" << std::endl;
         exit(0);
