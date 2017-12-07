@@ -3,9 +3,10 @@
 #include <iostream>
 #include "Card.h"
 
+template <typename T>
 class Stack{
     private:
-        Card** stack;
+        T** stack;
         int capacity;
         bool isEmpty() const;
         bool isFull() const;
@@ -19,9 +20,9 @@ class Stack{
         int getSize();
         void setSize(int s);
         void setCapacity(int c);
-        void push(Card* c);
-        Card* pop();
-        Card* peek()const;
+        void push(T* c);
+        T* pop();
+        T* peek()const;
         Stack& operator=(const Stack& s);
         friend const std::ostream& operator<<(std::ostream& os, Stack& s);
         friend const std::istream& operator>>(std::istream& is, Stack& s);

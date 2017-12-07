@@ -3,51 +3,61 @@
 #include "Card.h"
 #include "Stack.h"
 
-Stack::Stack(){
+template <typename T>
+Stack<T>::Stack(){
     capacity = 0;
     stack = NULL;
 }
 
-Stack::Stack(const Stack& other){
+template <typename T>
+Stack<T>::Stack(const Stack& other){
     capacity = other.capacity;
-    stack = new Card*[capacity];
+    stack = new T*[capacity];
     for(int i = 0; i < capacity; i++){
-        stack[i] = new Card(*(other.stack[i]));
+        stack[i] = new T(*(other.stack[i]));
     }
 }
 
-Stack::~Stack(){
+template <typename T>
+Stack<T>::~Stack(){
     for(int i = 0; i < capacity; i++){
          delete stack[i];
     }
     delete[] stack;
 }
 
-int Stack::getCapacity(){
+template <typename T>
+
+int Stack<T>::getCapacity(){
     return capacity;
 }
 
-void Stack::push(Card* c){
+template <typename T>
+void Stack<T>::push(T* c){
     grow();
     stack[capacity - 1] = c;
 }
 
-Card* Stack::pop(){
+template <typename T>
+
+T* Stack<T>::pop(){
     
     if(isEmpty()){
         return NULL;
     }
-    Card* temp = stack[capacity - 1];
+    T* temp = stack[capacity - 1];
     shrink();
     return temp; 
 }
 
-bool Stack::isEmpty()const {
+template <typename T>
+bool Stack<T>::isEmpty()const {
     return capacity == 0;
 }
 
 
-Card* Stack::peek() const{ 
+template <typename T>
+T* Stack<T>::peek() const{ 
     if (isEmpty())
     {
         return NULL;
@@ -55,9 +65,10 @@ Card* Stack::peek() const{
    return stack[capacity - 1];
 }
 
-void Stack::grow(){
+template <typename T>
+void Stack<T>::grow(){
     capacity++;
-    Card** temp = new Card*[capacity];
+    T** temp = new T*[capacity];
     for(int i = 0; i < capacity - 1; i++){
         temp[i] = stack[i];
     }
@@ -65,7 +76,8 @@ void Stack::grow(){
     stack = temp;
 }
 
-void Stack::shrink()
+template <typename T>
+void Stack<T>::shrink()
 {
     if (isEmpty())
     {
@@ -74,29 +86,32 @@ void Stack::shrink()
     capacity--;
 }
 
-Stack& Stack::operator=(const Stack& s){
+template <typename T>
+Stack<T>& Stack<T>::operator=(const Stack& s){
     if (this == &s)
       return *this;
     capacity = s.capacity;
     delete[] stack;
-    stack = new Card*[capacity];
+    stack = new T*[capacity];
     for(int i = 0; i < capacity; i++){
-        stack[i] = new Card(*(s.stack[i]));
+        stack[i] = new T(*(s.stack[i]));
     }
     return *this;
 }
 
-const std::ostream& operator<<(std::ostream& os, Stack& s){
+template <typename T>
+const std::ostream& operator<<(std::ostream& os, Stack<T>& s){
     while (!s.isEmpty())
     {
-        Card* c = s.pop();
+        T* c = s.pop();
         os << *c;
         delete c;
     }
     return os;
 }
 
-const std::istream& operator>>(std::istream& is, Stack& s){
+template <typename T>
+const std::istream& operator>>(std::istream& is, Stack<T>& s){
     for(int i = 0; i < s.capacity; i++){
         is >> *(s.stack[i]);
     }   

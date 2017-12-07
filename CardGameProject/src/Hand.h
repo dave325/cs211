@@ -6,10 +6,10 @@
 
 class Hand {
 private:
-	LinkedList * hand;
+	LinkedList<Card> * hand;
 public:
 	Hand();
-	LinkedList getHand();
+	LinkedList<Card>* getHand();
 	int countRank(int rank);
 	int evaluate();
 	Card* getCardAt(int index);

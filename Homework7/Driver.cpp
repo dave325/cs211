@@ -4,7 +4,7 @@
 #include "SafeMatrix.h"
 
 int main(){
-    SafeArray<int> s;
-    //std::cout << s.length();
+    SafeMatrix<int> s{2};
+    std::cout << s.length() << std::endl;
     return 0;
 }

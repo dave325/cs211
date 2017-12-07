@@ -3,32 +3,38 @@
 #include "Card.h"
 #include "LinkedList.h"
 
-LinkedList::Node::Node(){
+template <typename T>
+LinkedList<T>::Node::Node(){
     data = NULL;
     next = NULL;
 }
 
-LinkedList::Node::Node(Card* data){
+template <typename T>
+LinkedList<T>::Node::Node(T* data){
     this->data = data;
     this->next = NULL;
 }
 
-LinkedList::Node::Node(Card* data, Node* next){
+template <typename T>
+LinkedList<T>::Node::Node(T* data, Node* next){
     this->data = data;
     this->next = next;
 }
 
-LinkedList::LinkedList(){
+template <typename T>
+LinkedList<T>::LinkedList(){
     this->head = NULL;
 	this->tail = NULL;
 	this->size = 0;
 }
 
-bool LinkedList::isEmpty(){
+template <typename T>
+bool LinkedList<T>::isEmpty(){
     return size == 0;
 }
 
-void LinkedList::insertAtHead(Card* data){
+template <typename T>
+void LinkedList<T>::insertAtHead(T* data){
     if(isEmpty()){
         Node* n = new Node(data);
         head = n;
@@ -39,7 +45,8 @@ void LinkedList::insertAtHead(Card* data){
     size++;
 }
 
-void LinkedList::insertAtTail(Card* data){
+template <typename T>
+void LinkedList<T>::insertAtTail(T* data){
     if(isEmpty()){
         insertAtHead(data);
         return;
@@ -50,11 +57,13 @@ void LinkedList::insertAtTail(Card* data){
     size++;
 }
 
-int LinkedList::getCount(){
+template <typename T>
+int LinkedList<T>::getCount(){
     return size;
 }
 
-void LinkedList::insertAtIndex(int index, Card* data){
+template <typename T>
+void LinkedList<T>::insertAtIndex(int index, T* data){
     Node* n = head;
     int i = 0;
     if(index > size || index < 0){
@@ -82,12 +91,13 @@ void LinkedList::insertAtIndex(int index, Card* data){
     }
 }
 
-void LinkedList::remove(Card& data){
-    Node* n = head;
-    
+template <typename T>
+void LinkedList<T>::remove(T& data){
+    Node* n = head;    
 }
 
-Card* LinkedList::removeAtIndex(int index){
+template <typename T>
+T* LinkedList<T>::removeAtIndex(int index){
     Node* n = head;
     int i = 0;
     while(n != NULL || index > size){
@@ -104,11 +114,13 @@ Card* LinkedList::removeAtIndex(int index){
     return n->data;
 }
 
-int LinkedList::search(Card* data){
+template <typename T>
+int LinkedList<T>::search(T* data){
     return 0;
 }
 
-LinkedList::Node* LinkedList::operator[](int i){
+template <typename T>
+LinkedList<T>::Node* LinkedList<T>::operator[](int i){
     if(i < 0 || i > size){
         std::cerr << "Index does not exist!";
         exit(0);
@@ -125,7 +137,8 @@ LinkedList::Node* LinkedList::operator[](int i){
     return n;
 }
 
-const std::ostream& operator<<(std::ostream& os, LinkedList l){
+template <typename T>
+const std::ostream& operator<<(std::ostream& os, LinkedList<T> l){
     for(int i = 0; i < l.size; i++){
         os << *(l[i]->data);
     }

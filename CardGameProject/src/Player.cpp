@@ -31,12 +31,14 @@ std::string Player::playerInfo(){
         << hand;
 }
 std::string Player::showHand(){
-    (*hand).display();
+    hand->display();
 }
 
-bool Player::hasRank(int rank);
+bool Player::hasRank(int rank){
+    return hand->hasRank(rank);
+}
 void Player::addCard(Card * card){
-    (*hand).getHand().insertAtIndex((*hand).getCount(), card);
+    hand->getHand()->insertAtIndex((*hand).getCount(), card);
 }
 Card * Player::getCardAt(int index){
     return (*hand).getCardAt(index);
