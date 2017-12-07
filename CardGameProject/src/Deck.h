@@ -6,14 +6,14 @@
 
 class Deck{
 private:
-    Stack deck;
+    Stack<Card> deck;
     int remainingCards;
     int capacity;
 public:
     Deck();
     // setters
     int getRemainingCards();
-    Stack getDeck();
+    Stack<Card> getDeck();
     int getCapacity();
     void shuffle();
     Card* deal();

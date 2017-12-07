@@ -38,7 +38,7 @@ public:
 	LinkedList::Node* operator[](int i);	
 	const LinkedList& operator=(LinkedList& other);
 	friend const std::ostream& operator<<(std::ostream& os, LinkedList l);
-};	
+};
 
 
 template <typename T>
@@ -168,19 +168,5 @@ LinkedList<T>::Node* LinkedList<T>::operator[](int i){
         return n;
     }
     int j = 0;
-    while(j < i){
-        n = n->next;
-        j++;
-    }
-    return n;
 }
-
-template <typename T>
-const std::ostream& operator<<(std::ostream& os, LinkedList<T> l){
-    for(int i = 0; i < l.size; i++){
-        os << *(l[i]->data);
-    }
-    return os;
-}
-
 #endif
