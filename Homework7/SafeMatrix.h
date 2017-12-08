@@ -12,15 +12,15 @@ class SafeMatrix
    private:
       int row_size;
       int col_size;
-      T** array;
+      SafeArray<T>** array;
    public:
       SafeMatrix(int row_size, int col_size);
       SafeMatrix();
-      T& operator [] (int index);
+      SafeArray<T>& operator [] (int index);
       int length() const;
       ~SafeMatrix();
-      SafeMatrix(const SafeMatrix<T>& other);
-      SafeMatrix<T>& operator = (const SafeMatrix<T>& other);
+      SafeMatrix(const SafeMatrix<SafeArray<T> >& other);
+      SafeMatrix<SafeArray<T> >& operator = (const SafeMatrix<SafeArray<T> >& other);
 };
 
 
@@ -38,14 +38,14 @@ SafeMatrix<T>::SafeMatrix(int row_size, int col_size) : row_size(row_size), col_
       cout << "Array size cannnot be negative." << endl;
       exit(1);
    } 
-   array = new T*[row_size];
+   array = new SafeArray<T>*[row_size];
    for(int i = 0; i < row_size; i++){
-        array[i] = new T(col_size);
+        array[i] = new SafeArray<T>(col_size);
    }
 }
 
 template <typename T>
-T& SafeMatrix<T>::operator [] (int index)
+SafeArray<T>& SafeMatrix<T>::operator [] (int index)
 {
    if (index < 0 || index >= row_size)
    {
@@ -78,7 +78,7 @@ SafeMatrix<T>::~SafeMatrix()
 
 
 template <typename T>
-SafeMatrix<T>::SafeMatrix(const SafeMatrix<T>& other) : row_size(other.row_size)
+SafeMatrix<T>::SafeMatrix(const SafeMatrix<SafeArray<T> >& other) : row_size(other.row_size)
 {
    array = new SafeArray<T>*[row_size];
 
@@ -89,7 +89,7 @@ SafeMatrix<T>::SafeMatrix(const SafeMatrix<T>& other) : row_size(other.row_size)
 }
 
 template <typename T>
-SafeMatrix<T>& SafeMatrix<T>::operator = (const SafeMatrix<T>& other)
+SafeMatrix<SafeArray<T> >& SafeMatrix<T>::operator = (const SafeMatrix<SafeArray<T> >& other)
 {
    if (this != &other)
    {
