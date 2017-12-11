@@ -27,6 +27,10 @@ void Card::setRank(int r){
     rank = r;
 }
 
+void Card::setValue(int v){
+    value = v;
+}
+
 int Card::getSuit(){
     return suit;
 }
@@ -35,6 +39,9 @@ int Card::getRank(){
     return rank;
 }
 
+int Card::getValue(){
+    return value;
+}
 /*
 *   < 0 if less than
 *   0 if equal

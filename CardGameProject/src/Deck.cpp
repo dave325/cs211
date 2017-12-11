@@ -4,7 +4,7 @@
 #include <ctime>
 #include "Deck.h"
 #include "Card.h"
-#include "Stack.h"
+#include "Stack.cpp"
 
 Deck::Deck(){
     capacity = 52;
@@ -21,10 +21,9 @@ int Deck::getCapacity(){
     return capacity;
 }
 
-Stack Deck::getDeck(){
+Stack<Card>& Deck::getDeck(){
     return deck;
 }
-
 
 void Deck::shuffle(){
     Card** s = new Card*[capacity];
@@ -49,7 +48,10 @@ void Deck::createDeck(){
      for(int i = 0; i < capacity; i++){
         if(k == 13) k = 0;
         if(j == 4 ) j = 0;
-        Card* c = new Card(j,k);
+        Card* c = new Card(j,k,(k+1));
+        if((*c).getRank() > 9 && (*c).getRank() < 13){
+            (*c).setValue(10);
+        }
         deck.push(c);
         remainingCards++;
         j++;

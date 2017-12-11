@@ -1,7 +1,7 @@
 #ifndef HAND_H
 #define HAND_H
 
-#include "LinkedList.h"
+#include "LinkedList.cpp"
 #include <string>
 
 class Hand {

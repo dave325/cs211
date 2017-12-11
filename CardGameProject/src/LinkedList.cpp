@@ -1,7 +1,50 @@
+#ifndef LINKEDLIST_H
+#define LINKEDLIST_H
+
 #include <string>
-#include <iostream>
 #include "Card.h"
-#include "LinkedList.h"
+
+template <typename T>
+class LinkedList {
+public:
+	class Node {
+	public:
+		T * data;
+		Node * next;
+		Node();
+		Node(T * data);
+		Node(T * data, Node * next);
+	};
+private:
+	Node * head;
+	Node * tail;
+	int size;
+	bool isEmpty();
+	void insertAtHead(T * data);
+	void insertAtTail(T * data);
+	T * removeAtHead();
+	T * removeAtTail();
+public:
+	LinkedList();
+	LinkedList(const LinkedList& l);
+	~LinkedList();
+	int getCount();
+	void grow();
+	void shrink();
+	void insertAtIndex(int index, T * data);
+	void remove(T& data);
+	T * removeAtIndex(int index);
+	int search(T * data);
+	LinkedList<T>::Node* operator[](int i);	
+	const LinkedList& operator=(LinkedList& other);
+	friend const std::ostream& operator<<(std::ostream& os, LinkedList<T> l){
+        for(int i = 0; i < l.size; i++){
+            os << *(l[i]->data);
+        }
+        return os;
+    }
+};
+
 
 template <typename T>
 LinkedList<T>::Node::Node(){
@@ -40,7 +83,9 @@ void LinkedList<T>::insertAtHead(T* data){
         head = n;
         tail = head;
     }else{
+        Node* temp = head;
         head = new Node(data, head);
+        head->next = temp;
     }
     size++;
 }
@@ -65,30 +110,32 @@ int LinkedList<T>::getCount(){
 template <typename T>
 void LinkedList<T>::insertAtIndex(int index, T* data){
     Node* n = head;
-    int i = 0;
+    Node* newNode = new Node(data);
     if(index > size || index < 0){
         std::cerr << "Index does not exist";
         return;
     }
+
+    if(isEmpty() || index == 0){
+        insertAtHead(data);
+        return;
+    }
+
     if(index == size){
         insertAtTail(data);
         return;
     }
-    if(isEmpty()){
-        insertAtHead(data);
-        return;
-    }
-    while(n != NULL || size > index){
-        if(i == index){
-             Node* temp = n;
-             n->data = data;
-             n->next = temp;
-             size++;
-             return;
+    for(int i = 0; i < size; i++){
+        if(i == index-1){
+            size++;
+            Node* temp = n->next;
+            n->next = newNode;
+            newNode->next = temp;
+            return;
         }
-        i++;
         n = n->next;
     }
+    return;
 }
 
 template <typename T>
@@ -110,6 +157,7 @@ T* LinkedList<T>::removeAtIndex(int index){
             return temp->data;
         }
         i++;
+        n = n->next;
     }
     return n->data;
 }
@@ -120,7 +168,7 @@ int LinkedList<T>::search(T* data){
 }
 
 template <typename T>
-LinkedList<T>::Node* LinkedList<T>::operator[](int i){
+typename LinkedList<T>::Node* LinkedList<T>::operator[](int i){
     if(i < 0 || i > size){
         std::cerr << "Index does not exist!";
         exit(0);
@@ -137,10 +185,4 @@ LinkedList<T>::Node* LinkedList<T>::operator[](int i){
     return n;
 }
 
-template <typename T>
-const std::ostream& operator<<(std::ostream& os, LinkedList<T> l){
-    for(int i = 0; i < l.size; i++){
-        os << *(l[i]->data);
-    }
-    return os;
-}
+#endif

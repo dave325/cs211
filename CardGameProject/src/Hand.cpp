@@ -1,5 +1,5 @@
 #include "Hand.h"
-#include "LinkedList.h"
+#include "LinkedList.cpp"
 #include <iostream>
 #include <string>
 Hand::Hand(){
@@ -19,11 +19,15 @@ int Hand::countRank(int rank){
 }
 
 int Hand::evaluate(){
-   
+    int count = 0;
+    for(int i = 0; i < getCount(); i++){
+        count += (*getCardAt(i)).getValue();
+    }
+    return count;
 }
 
 Card* Hand::getCardAt(int index){
-    if(index < getCount() && index > getCount()){
+    if(index < 0 || index > getCount()){
         return NULL;
     }
     return (*hand)[index]->data;
@@ -35,7 +39,7 @@ int Hand::getCount(){
 
 bool Hand::hasRank(int rank){
     for(int i = 0; i < getCount(); i++){
-        if((*getCardAt(i)).getRank() == rank){
+        if(getCardAt(i)->getRank() == (rank)){
             return true;
         }
     }
@@ -43,7 +47,22 @@ bool Hand::hasRank(int rank){
 }
 
 void Hand::insertByRank(Card* card){
-
+    if(getCount() == 0){
+        hand->insertAtIndex(0,card);
+        return;
+    }
+    for(int i = 0; i < getCount(); i++){
+        if (i > 5 ){
+            std::cout << "broke" << std::endl;
+            break;
+        }
+        if(getCardAt(i)->getRank() >= card->getRank()){
+            std::cout << "i: " << *card;
+            (*hand).insertAtIndex(i,card);
+            return;
+        }
+    }
+     (*hand).insertAtIndex(getCount(),card);
 }
 
 bool Hand::isEmpty(){
@@ -51,7 +70,9 @@ bool Hand::isEmpty(){
 }
 
 std::string Hand::display(){
+    std::string s = "";
     for(int i = 0; i < getCount(); i++){
-        std::cout << hand[i];
+        std::cout << *getCardAt(i);
     }
+    return s;
 }

@@ -27,8 +27,8 @@ int Player::getPoints(){
 
 std::string Player::playerInfo(){
     std::cout << "Name: " << name << std::endl  
-        << "Points: " << points << std::endl
-        << hand;
+        << "Points: " << points << std::endl;
+    
 }
 std::string Player::showHand(){
     hand->display();
@@ -38,14 +38,18 @@ bool Player::hasRank(int rank){
     return hand->hasRank(rank);
 }
 void Player::addCard(Card * card){
-    hand->getHand()->insertAtIndex((*hand).getCount(), card);
+    hand->getHand()->insertAtIndex(hand->getCount(), card);
 }
 Card * Player::getCardAt(int index){
-    return (*hand).getCardAt(index);
+    return hand->getCardAt(index);
 }
-int Player::evaluateHand();
+int Player::evaluateHand(){
+    return hand->evaluate();
+}
 
 int Player::getTotalCards(){
-    return (*hand).getCount();
+    return hand->getCount();
 }
-string Player::display();
+void Player::display(){
+    hand->display();
+}

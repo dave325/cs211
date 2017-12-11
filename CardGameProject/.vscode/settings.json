@@ -33,6 +33,14 @@
         "stdexcept": "cpp",
         "__locale": "cpp",
         "algorithm": "cpp",
-        "chrono": "cpp"
+        "chrono": "cpp",
+        "__functional_base": "cpp",
+        "atomic": "cpp",
+        "functional": "cpp",
+        "locale": "cpp",
+        "ratio": "cpp",
+        "system_error": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp"
     }
 }

@@ -3,18 +3,27 @@
 #include <cstdlib>
 #include <ctime>
 #include "Card.h"
-#include "Stack.h"
 #include "Deck.h"
-#include "LinkedList.h"
+#include "Hand.h"
+#include "Player.h"
 int main(){
     Deck d;
-    LinkedList l;
-    l.insertAtIndex(0,d.deal());
-    l.insertAtIndex(1,d.deal());
-    l.insertAtIndex(2,d.deal());
-    std::cout << "After Deal" << std::endl;
-    std::cout << l;
-    std::cout << d.getRemainingCards();
-    std::cout << *d.getDeck().peek();
+    Hand h;
+    Player p("David");
+    h.insertByRank(d.deal());
+    h.insertByRank(d.deal());
+    h.insertByRank(d.deal());
+    h.insertByRank(d.deal());
+    h.insertByRank(d.deal());
+    h.insertByRank(d.deal());
+    for(int i = 0; i < h.getCount(); i++){
+        std::cout << *h.getCardAt(i);
+        p.addCard(h.getCardAt(i));
+    }
+    std::cout << "After initial show" <<std::endl;
+    p.display();
+    std::cout << p.evaluateHand();
+    std::cout << "\nrank " << h.hasRank(1) << std::endl;
+    std::cout << d.getRemainingCards() << std::endl;
     return 0;
 }

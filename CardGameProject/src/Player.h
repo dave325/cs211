@@ -26,7 +26,7 @@ public:
 	int evaluateHand();
 
 	int getTotalCards();
-	string display();
+	void display();
 };
 
 #endif

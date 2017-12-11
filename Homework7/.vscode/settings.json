@@ -10,6 +10,12 @@
         "utility": "cpp",
         "cstdlib": "cpp",
         "__locale": "cpp",
-        "__string": "cpp"
+        "__string": "cpp",
+        "__config": "cpp",
+        "__nullptr": "cpp",
+        "exception": "cpp",
+        "new": "cpp",
+        "stdexcept": "cpp",
+        "typeinfo": "cpp"
     }
 }

@@ -1,7 +1,41 @@
-#include <string>
+#ifndef STACK_H
+#define STACK_H
 #include <iostream>
 #include "Card.h"
-#include "Stack.h"
+
+template <typename T>
+class Stack{
+    private:
+        T** stack;
+        int capacity;
+        bool isEmpty() const;
+        bool isFull() const;
+        void grow();
+        void shrink();
+    public:
+        Stack();
+        Stack(const Stack& other);
+        ~Stack();
+        int getCapacity();
+        int getSize();
+        void setSize(int s);
+        void setCapacity(int c);
+        void push(T* c);
+        T* pop();
+        T* peek()const;
+        Stack& operator=(const Stack& s);
+        friend const std::ostream& operator<<(std::ostream& os, Stack<T>& s){
+            while (!s.isEmpty())
+            {
+                T* c = s.pop();
+                os << *c;
+                delete c;
+            }
+            return os;
+        }
+        friend const std::istream& operator>>(std::istream& is, Stack<T>& s);
+};
+
 
 template <typename T>
 Stack<T>::Stack(){
@@ -99,16 +133,6 @@ Stack<T>& Stack<T>::operator=(const Stack& s){
     return *this;
 }
 
-template <typename T>
-const std::ostream& operator<<(std::ostream& os, Stack<T>& s){
-    while (!s.isEmpty())
-    {
-        T* c = s.pop();
-        os << *c;
-        delete c;
-    }
-    return os;
-}
 
 template <typename T>
 const std::istream& operator>>(std::istream& is, Stack<T>& s){
@@ -117,3 +141,4 @@ const std::istream& operator>>(std::istream& is, Stack<T>& s){
     }   
     return is;
 }
+#endif

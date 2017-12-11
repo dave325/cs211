@@ -1,6 +1,6 @@
 #include <string>
 #include "Card.h"
-#include "Stack.h"
+#include "Stack.cpp"
 #ifndef DECK_H
 #define DECK_H
 
@@ -13,7 +13,7 @@ public:
     Deck();
     // setters
     int getRemainingCards();
-    Stack<Card> getDeck();
+    Stack<Card>& getDeck();
     int getCapacity();
     void shuffle();
     Card* deal();

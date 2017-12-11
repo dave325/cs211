@@ -17,11 +17,13 @@ public:
     void setSuit(int s);
 
     void setRank(int r);
+    void setValue(int v);
     // getters
 
     int getSuit();
 
     int getRank();
+    int getValue();
     int compareTo(const Card& otherCard);
     int compareByRank(const Card& otherCard);
     int compareBySuit(const Card& otherCard);

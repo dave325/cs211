@@ -8,7 +8,7 @@
  */ 
 
 int main(){
-    SafeMatrix<int> s(2,3);
+    SafeMatrix<int> s(2,6);
     for(int i = 0; i < s.length(); i++){
         for(int j = 0; j < s[0].length(); j++){
             s[i][j] = (i *j) + (5 + j);
@@ -19,10 +19,18 @@ int main(){
             std::cout << s[i][j] << std::endl;
         }
     }
-    SafeMatrix<std::string> s1(2,2);
+    SafeMatrix<std::string> s1(5,2);
     s1[0][0] = "one";
     s1[1][0] = "two";
-    std::cout << s1[0][0] << std::endl;
-    std::cout << s1[1][0] << std::endl;
+    for(int i = 0; i < s1.length(); i++){
+        for(int j = 0; j < s1[0].length(); j++){
+            s1[i][j] =  'A'+ (i + j + 5);
+        }
+    }
+    for(int i = 0; i < s1.length(); i++){
+        for(int j = 0; j < s1[0].length(); j++){
+            std::cout << s1[i][j] << std::endl;
+        }
+    }
     return 0;
 }
