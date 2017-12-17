@@ -52,6 +52,9 @@ void Deck::createDeck(){
         if((*c).getRank() > 9 && (*c).getRank() < 13){
             (*c).setValue(10);
         }
+        if((*c).getRank() == 0){
+            c->setValue(11);
+        }
         deck.push(c);
         remainingCards++;
         j++;

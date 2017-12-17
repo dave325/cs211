@@ -3,6 +3,12 @@
 #include "Deck.h"
 #include <string>
 
+Player::Player(){
+    name = "";
+    hand = new Hand();
+    points = 0;
+}
+
 Player::Player(std::string n){
     name = n;
     hand = new Hand();
@@ -37,19 +43,27 @@ std::string Player::showHand(){
 bool Player::hasRank(int rank){
     return hand->hasRank(rank);
 }
+
 void Player::addCard(Card * card){
     hand->getHand()->insertAtIndex(hand->getCount(), card);
 }
+
 Card * Player::getCardAt(int index){
     return hand->getCardAt(index);
 }
+
 int Player::evaluateHand(){
     return hand->evaluate();
 }
+
 
 int Player::getTotalCards(){
     return hand->getCount();
 }
 void Player::display(){
+    if(getTotalCards() == 0){
+        std::cout << "No cards in hand." <<std::endl;
+        return;
+    }
     hand->display();
 }

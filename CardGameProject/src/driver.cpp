@@ -6,7 +6,12 @@
 #include "Deck.h"
 #include "Hand.h"
 #include "Player.h"
+#include "BlackJack.h"
+
 int main(){
+    BlackJack b;
+    b.play();
+    /*
     Deck d;
     Hand h;
     Player p("David");
@@ -25,5 +30,6 @@ int main(){
     std::cout << p.evaluateHand();
     std::cout << "\nrank " << h.hasRank(1) << std::endl;
     std::cout << d.getRemainingCards() << std::endl;
+    */
     return 0;
 }

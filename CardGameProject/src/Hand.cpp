@@ -23,6 +23,9 @@ int Hand::evaluate(){
     for(int i = 0; i < getCount(); i++){
         count += (*getCardAt(i)).getValue();
     }
+    if(count > 21 && hasRank(0)){
+        count -= 10;
+    }
     return count;
 }
 

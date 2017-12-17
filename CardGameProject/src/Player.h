@@ -11,6 +11,7 @@ private:
 	Hand * hand;
 	int points;
 public:
+	Player();
 	Player(string n);
 	void setName(string name);
 	string getName();
