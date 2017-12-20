@@ -15,16 +15,17 @@ class BlackJack{
         int currPlayer;
         Player* p;
         Deck d;
+        void initGame();
+        bool calcWinner();
+        void playerTurn();
+        void dealerTurn();
     public:
         BlackJack();
         void dealCard();
         void addPlayer();
         void addPlayer(Player p1);
-        void initGame();
-        void playerTurn();
         Player getPlayer(int i);
         Player* getAllPlayers();
-        bool calcWinner();
         bool getWinner();
         void play();
         void resetCounter();

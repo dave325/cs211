@@ -55,46 +55,79 @@ void BlackJack::initGame(){
         check[i] = false;
         resetCounter();
     }
-
+    currPlayer = 1;
 }
 
 void BlackJack::playerTurn(){
-    std::cout << "Current Player " << (currPlayer+1) << ": " << p[currPlayer].getName() << "\ntotal: " << p[currPlayer].evaluateHand() << "\n";
+    char ans;
+    while(ans != 'S'){
+        std::cout << "Current Player " << (currPlayer+1) << ": " << p[currPlayer].getName() << "\ntotal: " << p[currPlayer].evaluateHand() << "\n";
+        p[currPlayer].display();
+        std::cout << "\n";
+        std::cout << "Current Player " << (currPlayer+1) << "\nWould you like to hit or hold? Press h for hit and s for hold.\n"; 
+        std::cin >> ans;
+        ans = toupper(ans);
+        if(ans == 'H' && !check[currPlayer]){
+            dealCard();
+            if(calcWinner()){
+                std::cout << "Player " << (currPlayer+1) << " wins!\n";
+                return;
+            }
+
+            if(p[currPlayer].evaluateHand() > 21){
+                std::cout << "Bust!\n\n";
+                check[currPlayer] = true;
+                break;
+            }
+        }else{
+            break;
+        }
+    }
+    resetCounter();
+}
+
+void BlackJack::dealerTurn(){
+    std::cout << "Current Player "  << p[currPlayer].getName() << "\ntotal: " << p[currPlayer].evaluateHand() << "\n";
     p[currPlayer].display();
     std::cout << "\n";
     if(currPlayer == 0 && !check[currPlayer]){
-        if(p[currPlayer].evaluateHand() < 17){
+        while(p[currPlayer].evaluateHand() < 17){
             dealCard();
-            if(calcWinner()){
-                 std::cout << "Player " << (currPlayer+1) << " wins!\n";
-                 return;
+        }
+        check[currPlayer] = true;
+        std::cout << "Current Player "  << p[currPlayer].getName() << "\ntotal: " << p[currPlayer].evaluateHand() << "\n";
+        p[currPlayer].display();
+        std::cout << "\n";
+        if(calcWinner()){
+            for(int i = 1; i < size; i++){
+                if(p[i].evaluateHand() == p[0].evaluateHand()){
+                    std::cout << "Tie!\n";
+                    return;
+                }
+            }
+        }
+        if(p[currPlayer].evaluateHand() < 21){
+            for(int i = 1; i < size; i++){
+                if(p[i].evaluateHand() > p[0].evaluateHand()){
+                    std::cout << "Player " << (i+1) << " wins!\n";
+                }
+                if(p[i].evaluateHand() == p[0].evaluateHand()){
+                    std::cout << "Player " << (i+1) << " pushes!\n";
+                }
+                if(p[i].evaluateHand() < p[0].evaluateHand()){
+                    std::cout << "Player " << (i+1) << " loses!\n";
+                }           
             }
         }else{
-            check[currPlayer] = true;
-        }
-        resetCounter();
-        return;
-    }
-    if(p[currPlayer].evaluateHand() > 21){
-         check[currPlayer] = true;
-         resetCounter();
+            std::cout << "Dealer Busts!\n";
+            for(int i = 1; i < size; i++){
+                if(p[i].evaluateHand() < p[0].evaluateHand() && p[i].evaluateHand() < 21){
+                    std::cout << "Player " << (i+1) << " wins!\n";
+                }    
+            }
+        }       
          return;
-     }
-    char ans;
-    std::cout << "Current Player " << (currPlayer+1) << "\nWould you like to hit or hold? Press h for hit and s for hold.\n"; 
-    std::cin >> ans;
-    ans = toupper(ans);
-    if(ans == 'H' && !check[currPlayer]){
-        dealCard();
-    }else{
-        check[currPlayer] = true;
     }
-
-    if(calcWinner()){
-        std::cout << "Player " << (currPlayer+1) << " wins!\n";
-        return;
-    }
-    resetCounter();
 }
 
 Player BlackJack::getPlayer(int i){
@@ -110,16 +143,6 @@ Player BlackJack::getPlayer(int i){
  }
 
  bool BlackJack::calcWinner(){
-     for(int i = 0; i < size; i++){
-         if(check[i] == false){
-             break;
-         }
-         if(i == size-1){
-             std::cout << "Draw\n" ;
-             winner = true;
-             return true;
-         }
-     }
      if(p[currPlayer].evaluateHand() == 21){
          p[currPlayer].display();
          winner = true;
@@ -137,7 +160,15 @@ void BlackJack::resetCounter(){
 }
 
  void BlackJack::play(){
+     int i = 0;
      while(!winner){
+        if(currPlayer == 0){
+            break;
+        }
         playerTurn();
      }
+     if(winner){
+         return;
+     }
+     dealerTurn();
  }

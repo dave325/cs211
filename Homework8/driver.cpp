@@ -29,12 +29,18 @@ void output(std::vector<File*> v){
     v.erase(v.begin());
     output(v);
 }
+/*
 
 std::vector<File*> sortVector(std::vector<File*> v, std::string s){
-    if(v.empty())
-        return v;
-    if(v.back()->getType() != s){
-        v.erase(v.end());
+    std::vector<File*> v1;
+    static int i = 0;
+    if(v.size() == i){
+        return v1;
     }
-    return sortVector(v, s);
+    if(v.front()->getType() == s){
+        v1.push_back(v.at(i));
+        i++;
+    }
+     return sortVector(v, s);
 }
+*/
