@@ -70,7 +70,14 @@ LinkedList<T>::LinkedList(){
 	this->tail = NULL;
 	this->size = 0;
 }
-
+template <typename T>
+LinkedList<T>::~LinkedList(){
+    Node* n = head;
+    for(int i = 0; i < size;i++){
+        delete n;
+        n = n->next;
+    }
+}
 template <typename T>
 bool LinkedList<T>::isEmpty(){
     return size == 0;
@@ -125,22 +132,26 @@ void LinkedList<T>::insertAtIndex(int index, T* data){
         insertAtTail(data);
         return;
     }
-    for(int i = 0; i < size; i++){
-        if(i == index-1){
-            size++;
-            Node* temp = n->next;
-            n->next = newNode;
-            newNode->next = temp;
-            return;
-        }
+    for(int i = 0; i < index - 1; i++){
         n = n->next;
     }
+    size++;
+    Node* temp = n->next;
+    n->next = newNode;
+    newNode->next = temp;
+    temp->next = newNode;
     return;
 }
 
 template <typename T>
 void LinkedList<T>::remove(T& data){
     Node* n = head;    
+    int i = 0;
+    while(n != data){
+        i++;
+        n = n->next;
+    }
+    removeAtIndex(i);
 }
 
 template <typename T>
@@ -149,12 +160,9 @@ T* LinkedList<T>::removeAtIndex(int index){
     int i = 0;
     while(n != NULL || index > size){
         if(i == index){
-            Node* temp = n;
-            delete n;
-            n = NULL;
-            n = temp->next;
+            n = n->next;
             size--;
-            return temp->data;
+            return n->data;
         }
         i++;
         n = n->next;
@@ -164,7 +172,16 @@ T* LinkedList<T>::removeAtIndex(int index){
 
 template <typename T>
 int LinkedList<T>::search(T* data){
-    return 0;
+     Node* n = head;    
+    int i = 0;
+    while(n != data){
+        i++;
+        n = n->next;
+    }
+    if(n == NULL){
+        return -1;
+    }
+    return i;
 }
 
 template <typename T>

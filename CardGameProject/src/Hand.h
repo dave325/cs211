@@ -13,6 +13,7 @@ public:
 	int countRank(int rank);
 	int evaluate();
 	Card* getCardAt(int index);
+	void removeCardAt(int index);
 	int getCount();
 	bool hasRank(int rank);
 	void insertByRank(Card * card);

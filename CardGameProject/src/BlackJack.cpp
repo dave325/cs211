@@ -105,6 +105,8 @@ void BlackJack::dealerTurn(){
                     return;
                 }
             }
+            std::cout << "Dealer Wins!\n";
+            return;
         }
         if(p[currPlayer].evaluateHand() < 21){
             for(int i = 1; i < size; i++){
@@ -160,7 +162,6 @@ void BlackJack::resetCounter(){
 }
 
  void BlackJack::play(){
-     int i = 0;
      while(!winner){
         if(currPlayer == 0){
             break;

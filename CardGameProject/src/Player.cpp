@@ -52,14 +52,18 @@ Card * Player::getCardAt(int index){
     return hand->getCardAt(index);
 }
 
+void Player::removeCardAt(int index){
+    hand->removeCardAt(index);
+}
+
 int Player::evaluateHand(){
     return hand->evaluate();
 }
 
-
 int Player::getTotalCards(){
     return hand->getCount();
 }
+
 void Player::display(){
     if(getTotalCards() == 0){
         std::cout << "No cards in hand." <<std::endl;

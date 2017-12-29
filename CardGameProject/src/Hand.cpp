@@ -36,13 +36,17 @@ Card* Hand::getCardAt(int index){
     return (*hand)[index]->data;
 }
 
+void Hand::removeCardAt(int index){
+    hand->removeAtIndex(index);
+}
+
 int Hand::getCount(){
     return (*hand).getCount();
 }
 
 bool Hand::hasRank(int rank){
     for(int i = 0; i < getCount(); i++){
-        if(getCardAt(i)->getRank() == (rank)){
+        if(getCardAt(i)->getRank()+1 == (rank)){
             return true;
         }
     }

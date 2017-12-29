@@ -7,29 +7,13 @@
 #include "Hand.h"
 #include "Player.h"
 #include "BlackJack.h"
-
+/**
+ * Name: David Dataram
+ * Class: CS211 MW 7:30-8:20pm
+ * Completed extra credit of templating linked list and stack class
+ */ 
 int main(){
     BlackJack b;
     b.play();
-    /*
-    Deck d;
-    Hand h;
-    Player p("David");
-    h.insertByRank(d.deal());
-    h.insertByRank(d.deal());
-    h.insertByRank(d.deal());
-    h.insertByRank(d.deal());
-    h.insertByRank(d.deal());
-    h.insertByRank(d.deal());
-    for(int i = 0; i < h.getCount(); i++){
-        std::cout << *h.getCardAt(i);
-        p.addCard(h.getCardAt(i));
-    }
-    std::cout << "After initial show" <<std::endl;
-    p.display();
-    std::cout << p.evaluateHand();
-    std::cout << "\nrank " << h.hasRank(1) << std::endl;
-    std::cout << d.getRemainingCards() << std::endl;
-    */
     return 0;
 }

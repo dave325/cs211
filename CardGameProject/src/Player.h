@@ -25,7 +25,7 @@ public:
 	void addCard(Card * card);
 	Card * getCardAt(int index);
 	int evaluateHand();
-
+	void removeCardAt(int index);
 	int getTotalCards();
 	void display();
 };
